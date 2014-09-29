@@ -1,0 +1,6 @@
+bibentry("Manual",
+  title = "Gender: predict gender from names using historical data",
+  author = "Lincoln Mullen",
+  year = "2014",
+  url = "https://github.com/ropensci/gender"
+  )

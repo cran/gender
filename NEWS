@@ -1,0 +1,40 @@
+gender 0.4.1
+============
+
+* tests and vignettes run without depending on the genderdata package
+* users will be prompted to install the genderdata package from GitHub the 
+  first time that it is necessary
+* added a demo mode with a minimal dataset
+
+gender 0.4
+==========
+
+* data is now external to the gender package and is available in the 
+  genderdata package. 
+* genderdata package can be installed with a new function 
+
+gender 0.3
+==========
+
+* rewrote all functions to take only character vectors, not data frames, but
+  provided instructions on how to use with data frames
+* wrote a vignette describing the data sources and explaining the historical
+  methodology behind this package
+
+gender 0.2
+==========
+
+* implemented an `ipums` method that predicts gender before 1930 using U.S. Census
+  data from IPUMS (contributed by Benjamin Schmidt).
+
+* upgraded dependency on `dplyr` to 0.2.
+
+gender 0.1
+==========
+
+* function `gender` implements gender lookup for names and data frames
+
+* implemented finding gender by using the Kantrowitz names corpus
+
+* implemented finding gender by using the national Social Security
+  Administration data for names and dates of birth
