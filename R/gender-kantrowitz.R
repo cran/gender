@@ -1,22 +1,17 @@
-#' Find the gender of frst names using Kantrowitz names corpus
-#'
-#' This internal function implements the \code{method = "kantrowitz"} option of
-#' \code{\link{gender}}. See that function for documentation.
-#'
-#' @param name A character string of a first name.
-#' @return A list or (for multiple names) a list of lists containing the name
-#'   property and the predicted gender property.
-gender_kantrowitz <- function(name) {
-
-  # Load the necessary data the first time the function is called
-  if(!exists("kantrowitz", where = environment())) {
-    data("kantrowitz", package = "genderdata", envir = environment())
-  }
+# Find the gender of frst names using Kantrowitz names corpus
+#
+# This internal function implements the \code{method = "kantrowitz"} option of
+# \code{\link{gender}}. See that function for documentation.
+#
+# @param name A character string of a first name.
+# @return A list or (for multiple names) a list of lists containing the name
+#   property and the predicted gender property.
+gender_kantrowitz <- function(names) {
 
   # An internal function to predict the gender of one name
   apply_kantrowitz <- function(n) {
 
-    results <- kantrowitz %>% filter(name == tolower(n))
+    results <- genderdata::kantrowitz %>% filter(name == tolower(n))
 
     # If the name isn't in the data set, return use that information rather than
     # silently dropping a row
@@ -27,16 +22,16 @@ gender_kantrowitz <- function(name) {
     # Use the original capitalization of the name
     results$name <- n
 
-    return(as.list(results))
+    results
 
   }
 
   # Use the function directly if there is one name; use lapply if there are > 1.
   # Return the results as a list or a list of lists.
-  if (length(name) == 1) {
-    return(as.list(apply_kantrowitz(name)))
+  if (length(names) == 1) {
+    return(apply_kantrowitz(names))
   } else {
-    return(as.list(lapply(name, apply_kantrowitz)))
+    return(bind_rows(lapply(names, apply_kantrowitz)))
   }
 
 }

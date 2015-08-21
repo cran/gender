@@ -1,24 +1,23 @@
-# Demo finding the gender of first names using SSA data
+# Find the gender of first names using NAPP data
 #
-# This internal function implements the \code{method = "demo"} option of
+# This internal function implements the \code{method = "napp"} option of
 # \code{\link{gender}}. See that function for documentation.
 #
-# @param name A character string of a first name. Case insensitive.
+# @param names A character string of a first name. Case insensitive.
 # @param years This argument can be either a single year or a range of years in
-#   the form \code{c(1880, 1900)}. If no value is specified, then the names
-#   will be looked up for the period 1932 to 2012. If a year or range of years
+#   the form \code{c(1758, 1910)}. If no value is specified, then the names
+#   will be looked up for the period 1758 to 1910. If a year or range of years
 #   is specified, then the names will be looked up for that period. Dates may
-#   range from 1880 to 2012. For years before 1930, the IPUMS method is
-#   probably better.
-# @param certainty A boolean value, which determines whether or not to return
-#   the proportion of male and female uses of names in addition to determining
-#   the gender of names.
-gender_demo <- function(names, years) {
+#   range from 1758 to 1910.
+# @param countries The countries to look up the names for. Multiple countries
+#   can be specified.
+gender_napp <- function(names, years, countries) {
 
-  basic_names %>%
+  genderdata::napp %>%
     filter(name %in% tolower(names),
            year >= years[1],
-           year <= years[2]) %>%
+           year <= years[2],
+           country %in% countries) %>%
     group_by(name) %>%
     summarise(female = sum(female),
               male = sum(male)) %>%

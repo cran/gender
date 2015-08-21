@@ -15,7 +15,7 @@ test_that("a single name can be encoded", {
 })
 
 test_that("a single name returns a list with the name, gender, and proportions", {
-  expect_that(class(single), equals("list"))
+  expect_is(single, "data.frame")
   expect_that(length(single), equals(6))
   expect_that(names(single), equals(c("name", "proportion_male",
                                       "proportion_female", "gender",
@@ -40,5 +40,6 @@ test_that("Correct predictions from skewed SSA data", {
 })
 
 test_that("capitalization of name matches what was passed to it", {
-  expect_that(gender("Marie", method = "ssa")$name, equals("Marie"))
+  marie <- gender("Marie", years = 1978, method = "ssa")
+  expect_equal(marie$name, "Marie")
 })
