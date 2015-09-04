@@ -1,8 +1,8 @@
 Package: gender
 Type: Package
 Title: Predict Gender from Names Using Historical Data
-Version: 0.5.0
-Date: 2015-08-21
+Version: 0.5.1
+Date: 2015-09-03
 Authors@R: c(person("Lincoln", "Mullen", role = c("aut", "cre"),
     email = "lincoln@lincolnmullen.com"),
     person("Cameron", "Blevins", role = "ctb"),
@@ -22,10 +22,10 @@ License: MIT + file LICENSE
 VignetteBuilder: knitr
 BugReports: https://github.com/ropensci/gender/issues
 NeedsCompilation: no
-Packaged: 2015-08-22 01:46:26 UTC; lmullen
+Packaged: 2015-09-03 18:08:23 UTC; lmullen
 Author: Lincoln Mullen [aut, cre],
   Cameron Blevins [ctb],
   Ben Schmidt [ctb]
 Maintainer: Lincoln Mullen <lincoln@lincolnmullen.com>
 Repository: CRAN
-Date/Publication: 2015-08-22 10:50:37
+Date/Publication: 2015-09-04 07:42:15

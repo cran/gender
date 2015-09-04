@@ -1,7 +1,7 @@
-d7d3627dd3db91387a8b05dec43d9a10 *DESCRIPTION
+8eeacc91c0762d49069fd06330c4ca87 *DESCRIPTION
 61cc147343066cd44bc4b3d0a213eb4f *LICENSE
 1628eaec2c0fd76f38e1fac86371cf4c *NAMESPACE
-a3c390932c3514991b5758f475432bfc *NEWS
+7a99d5478f064db6c2d0339bb596350e *NEWS
 fd48825403a2444a00d0acc08a0c53a0 *R/gender-demo.R
 85da7dbdde27c017b4f5f869cf0e7a22 *R/gender-genderize.R
 7752947751ce93e069539e4ddc74fd17 *R/gender-ipums-usa.R
@@ -11,9 +11,9 @@ f6e6feaeb089535031c75b2e78e6949b *R/gender-kantrowitz.R
 919b7f86f8399ae4359fb5afb71ebd43 *R/gender-ssa.R
 b25da8884196152bf9c351cdce00cdd1 *R/gender.R
 c74eac324b47bfaedfaec574c1df2785 *R/gender_df.R
-d36d4786e9e08d304b1fe0d92354787d *R/install-genderdata-package.R
+be5abfe080283f1cf2fdab16dc77e172 *R/install-genderdata-package.R
 78736f289645404743d2a5089f1d0cd9 *R/sysdata.rda
-d439b41c5e361addc2654849de52e88d *README.md
+d588dcec4b76329cf67f8f1197934dba *README.md
 92413f2c1e1110fbfe3a86c72369e575 *build/vignette.rds
 1e7cecb44f8c2cd37c533dcb8887c160 *inst/CITATION
 73afe5387a693a93018337d775433b02 *inst/doc/predicting-gender.R
