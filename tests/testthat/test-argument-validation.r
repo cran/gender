@@ -21,7 +21,7 @@ test_that("error if years are not either range or single year", {
 
 test_that("error if method is not recognized", {
   expect_that(gender(sample_names_data, method = "my_nonworking_method"),
-              throws_error("Error in match.arg"))
+              throws_error("'arg' should be one of"))
 })
 
 test_that("function works with a single year", {
@@ -41,4 +41,13 @@ test_that("countries are mapped with their respective methods", {
   expect_error(gender("Madison", method = "napp", countries = "United States"),
                "NAPP data is only available for European countries.")
   expect_error(gender("Madison", method = "napp", countries = "New South Wales"))
+})
+
+test_that("year ranges out of scope of data are trimmed", {
+  expect_warning(gender("Jason", method = "ssa", years = c(1860, 1950)),
+                 "The year range provided has been trimmed")
+  expect_warning(gender("Jason", method = "ipums", years = c(1700, 1950)),
+                 "The year range provided has been trimmed")
+  expect_warning(gender("Jason", method = "napp", years = c(1754, 1765)),
+                 "The year range provided has been trimmed")
 })

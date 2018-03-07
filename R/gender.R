@@ -5,7 +5,7 @@
 #' data sets suitable for different time periods or geographical regions. See
 #' the package vignette for suggestions on using this function with multiple
 #' names and for a discussion of which data set is most suitable for your
-#' research question. When using certains methods, the \code{genderdata} data
+#' research question. When using certain methods, the \code{genderdata} data
 #' package is required; you will be prompted to install it if it is not already
 #' available.
 #'
@@ -25,7 +25,11 @@
 #'   U.S. Social Security Administration baby name data. (This method is based
 #'   on an implementation by Cameron Blevins.) The \code{"ipums"} method looks
 #'   up names from the U.S. Census data in the Integrated Public Use Microdata
-#'   Series. (This method was contributed by Ben Schmidt.) The
+#'   Series. (This method was contributed by Ben Schmidt.) The \code{"napp"}
+#'   method uses census microdata from Canada, Great Britain, Denmark,
+#'   Iceland, Norway, and Sweden from 1801 to 1910 created by the
+#'   \href{https://www.nappdata.org/napp/}{North Atlantic Population Project}.
+#'   The
 #'   \code{"kantrowitz"} method uses the Kantrowitz corpus of male and female
 #'   names. The \code{"genderize"} method uses the Genderize.io
 #'   <\url{http://genderize.io/}> API, which is based on "user profiles across
@@ -38,7 +42,7 @@
 #'   \code{"United States"} which will be assumed if no argument is specified.
 #'   For the \code{"napp"} method, you may specify a character vector with any
 #'   of the following countries: \code{"Canada"}, \code{"United Kingdom"},
-#'   \code{"Germany"}, \code{"Iceland"}, \code{"Norway"}, \code{"Sweden"}. For
+#'   \code{"Denmark"}, \code{"Iceland"}, \code{"Norway"}, \code{"Sweden"}. For
 #'   the \code{"kantrowitz"} and \code{"genderize"} methods, no country should
 #'   be specified.
 #' @return Returns a data frame containing the results of predicting the gender.
@@ -68,7 +72,7 @@ gender <- function(names, years = c(1932, 2012),
                    method = c("ssa", "ipums", "napp", "kantrowitz",
                               "genderize", "demo"),
                    countries = c("United States", "Canada", "United Kingdom",
-                                 "Germany", "Iceland", "Norway", "Sweden"))
+                                 "Denmark", "Iceland", "Norway", "Sweden"))
   {
 
   method <- match.arg(method)
@@ -100,7 +104,9 @@ gender <- function(names, years = c(1932, 2012),
   # Hand off the arguments to functions based on method, and do error checking
   if (method == "ssa") {
     if (years[1] < 1880 || years[2] > 2012) {
-      stop("Please provide a year range between 1880 and 2012.")
+      warning("The year range provided has been trimmed to fit within 1880 to 2012.")
+      if (years[1] < 1880) years[1] <- 1880
+      if (years[2] > 2012) years[2] <- 2012
     }
     if (!missing(countries) && countries != "United States") {
       stop("SSA data is only available for the United States of America.")
@@ -108,7 +114,9 @@ gender <- function(names, years = c(1932, 2012),
     gender_ssa(names = names, years = years)
   } else if (method == "demo") {
     if (years[1] < 1880 || years[2] > 2012) {
-      stop("Please provide a year range between 1880 and 2012.")
+      warning("The year range provided has been trimmed to fit within 1880 to 2012.")
+      if (years[1] < 1880) years[1] <- 1880
+      if (years[2] > 2012) years[2] <- 2012
     }
     if (!missing(countries) && countries != "United States") {
       stop("Demo data is only available for the United States of America.")
@@ -122,15 +130,20 @@ gender <- function(names, years = c(1932, 2012),
     gender_kantrowitz(names = names)
   } else if (method == "ipums") {
     if (years[1] < 1789 || years[2] > 1930) {
-      stop("Please provide a year range between 1789 and 1930.")
+      warning("The year range provided has been trimmed to fit within 1789 to 1930.")
+      if (years[1] < 1789) years[1] <- 1789
+      if (years[2] > 1930) years[2] <- 1930
     }
     if (!missing(countries) && countries != "United States") {
       stop("IPUMS data is only available for the United States of America.")
     }
     gender_ipums_usa(names = names, years = years)
   } else if (method == "napp") {
-    if (years[1] < 1758 || years[2] > 1910)
-      stop("Please provide a year range between 1758 and 1910.")
+    if (years[1] < 1758 || years[2] > 1910) {
+      warning("The year range provided has been trimmed to fit within 1758 to 1910.")
+      if (years[1] < 1758) years[1] <- 1758
+      if (years[2] > 1910) years[2] <- 1910
+    }
     if (missing(countries))
       countries <- countries[countries != "United States"]
     countries <- match.arg(countries, several.ok = TRUE)
@@ -138,7 +151,7 @@ gender <- function(names, years = c(1932, 2012),
       stop("NAPP data is only available for European countries. See ",
            "the documentation.")
     gender_napp(names = names, years = years, countries = countries)
-  }else if (method == "genderize") {
+  } else if (method == "genderize") {
     if (!missing(years))
       stop("Genderize method does not account for year.")
     if (!missing(countries))
