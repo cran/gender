@@ -1,12 +1,7 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-gender
-------
 
-An R package for predicting gender from first names using historical
-data.
-
-**Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:**
-[MIT](http://opensource.org/licenses/MIT)<br>
+# gender
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/gender)](https://CRAN.R-project.org/package=gender)
 [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/gender)](https://CRAN.R-project.org/package=gender)
@@ -17,7 +12,44 @@ Status](https://ci.appveyor.com/api/projects/status/github/ropensci/gender?branc
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/gender/master.svg)](https://codecov.io/github/ropensci/gender?branch=master)
 
-### Description
+## Guidelines and warnings
+
+This package attempts to infer gender (or more precisely, sex assigned
+at birth) based on first names using historical data, typically data
+that was gathered by the state. This method has many limitations, and
+before you use this package be sure to take into account the following
+guidelines.
+
+1)  Your analysis and the way you report it should take into account the
+    limitations of this method, which include its reliance of data
+    created by the state and its inability to see beyond the
+    state-imposed gender binary. At a minimum, be sure to read our
+    article explaining the limitations of this method, as well as the
+    review article that is critical of this sort of methodology, both
+    cited below.
+
+2)  Do not use this package to study individuals: it is at most useful
+    for studying populations in the aggregate.
+
+3)  Resort to this method only when the alternative is not a more
+    nuanced and justifiable approach to studying gender, but where the
+    alternative is not studying gender at all. For instance, for many
+    historical sources this approach might be the only way to get a
+    sense of the sex ratios in a population. But ask whether you really
+    need to use this method, whether you are using it responsibly, or
+    whether you could use a better approach instead.
+
+Blevins, Cameron, and Lincoln A. Mullen, “Jane, John … Leslie? A
+Historical Method for Algorithmic Gender Prediction,” *Digital
+Humanities Quarterly* 9, no. 3 (2015).
+<http://www.digitalhumanities.org/dhq/vol/9/3/000223/000223.html>
+
+Mihaljević, Helena, Marco Tullney, Lucía Santamaría, and Christian
+Steinfeldt. “Reflections on Gender Analyses of Bibliographic Corpora.”
+*Frontiers in Big Data* 2 (August 28, 2019): 29.
+<https://doi.org/10.3389/fdata.2019.00029>.
+
+## Description
 
 Data sets, historical or otherwise, often contain a list of first names
 but seldom identify those names by gender. Most techniques for finding
@@ -31,7 +63,7 @@ and the [North Atlantic Population
 Project](https://www.nappdata.org/napp/) to provide predictions of
 gender for first names for particular countries and time periods.
 
-### Installation
+## Installation
 
 You can install [this package from
 CRAN](https://cran.r-project.org/package=gender):
@@ -60,7 +92,7 @@ install.packages(c("gender", "genderdata"),
                  type = "source")
 ```
 
-### Using the package
+## Using the package
 
 The `gender()` function takes a character vector of names and a year or
 range of years and uses various datasets to predict the gender of names.
@@ -73,14 +105,14 @@ gender(c("Madison", "Hillary"), years = 1930, method = "ssa")
 #> # A tibble: 2 x 6
 #>   name    proportion_male proportion_female gender year_min year_max
 #>   <chr>             <dbl>             <dbl> <chr>     <dbl>    <dbl>
-#> 1 Hillary              1.                0. male      1930.    1930.
-#> 2 Madison              1.                0. male      1930.    1930.
+#> 1 Hillary               1                 0 male       1930     1930
+#> 2 Madison               1                 0 male       1930     1930
 gender(c("Madison", "Hillary"), years = c(2000, 2010), method = "ssa")
 #> # A tibble: 2 x 6
 #>   name    proportion_male proportion_female gender year_min year_max
 #>   <chr>             <dbl>             <dbl> <chr>     <dbl>    <dbl>
-#> 1 Hillary         0.00550             0.994 female    2000.    2010.
-#> 2 Madison         0.00460             0.995 female    2000.    2010.
+#> 1 Hillary          0.0055             0.994 female     2000     2010
+#> 2 Madison          0.0046             0.995 female     2000     2010
 ```
 
 See the package vignette for a fuller introduction and suggestions on
@@ -99,22 +131,38 @@ library(genderdata)
 data(package = "genderdata")
 ```
 
-### Citation
+## Citation
 
-If you use this package, I would appreciate a citation. You can see an
-up to date citation information with `citation("gender")`. You can cite
-either the package or the accompanying journal article.
+If you use this package, I would appreciate a citation.
 
-> Lincoln Mullen (2016). gender: Predict Gender from Names Using
-> Historical Data. R package version 0.5.2.
-> <https://github.com/ropensci/gender>
+``` r
+citation("gender")
+#> 
+#> To cite the 'gender' package, you may either cite the package
+#> directly or cite the journal article which explains its method:
+#> 
+#>   Lincoln Mullen (2018). gender: Predict Gender from Names Using
+#>   Historical Data. R package version 0.5.2.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {gender: Predict Gender from Names Using Historical Data},
+#>     author = {Lincoln Mullen},
+#>     year = {2018},
+#>     note = {R package version 0.5.2},
+#>     url = {https://github.com/ropensci/gender},
+#>   }
+#> 
+#> For the journal article, please cite:
+#> 
+#> Cameron Blevins and Lincoln Mullen, "Jane, John ... Leslie? A
+#> Historical Method for Algorithmic Gender Prediction," _Digital
+#> Humanities Quarterly_ 9, no. 3 (2015):
+#> <http://www.digitalhumanities.org/dhq/vol/9/3/000223/000223.html>.
+```
 
-> Cameron Blevins and Lincoln Mullen, “Jane, John … Leslie? A Historical
-> Method for Algorithmic Gender Prediction,” *Digital Humanities
-> Quarterly* 9, no. 3 (2015):
-> <http://www.digitalhumanities.org/dhq/vol/9/3/000223/000223.html>
-
-------------------------------------------------------------------------
+-----
 
 [![rOpenSCi
 logo](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
