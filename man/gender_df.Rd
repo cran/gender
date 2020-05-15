@@ -4,8 +4,12 @@
 \alias{gender_df}
 \title{Use gender prediction with data frames}
 \usage{
-gender_df(data, name_col = "name", year_col = "year",
-  method = c("ssa", "ipums", "napp", "demo"))
+gender_df(
+  data,
+  name_col = "name",
+  year_col = "year",
+  method = c("ssa", "ipums", "napp", "demo")
+)
 }
 \arguments{
 \item{data}{A data frame containing first names and birth year or range of
@@ -39,7 +43,7 @@ then be merged back into your original data frame.
 }
 \examples{
 library(dplyr)
-demo_df <- data_frame(names = c("Hillary", "Hillary", "Hillary",
+demo_df <- tibble(names = c("Hillary", "Hillary", "Hillary",
                                 "Madison", "Madison"),
                       birth_year = c(1930, 2000, 1930, 1930, 2000),
                       min_year = birth_year - 1,

@@ -26,7 +26,7 @@
 #'   years.
 #' @examples
 #' library(dplyr)
-#' demo_df <- data_frame(names = c("Hillary", "Hillary", "Hillary",
+#' demo_df <- tibble(names = c("Hillary", "Hillary", "Hillary",
 #'                                 "Madison", "Madison"),
 #'                       birth_year = c(1930, 2000, 1930, 1930, 2000),
 #'                       min_year = birth_year - 1,
@@ -50,14 +50,18 @@ gender_df <- function(data, name_col = "name", year_col = "year",
             length(year_col) >= 1,
             length(year_col) <= 2,
             year_col %in% names(data))
-  if (length(year_col) == 1) year_col <- c(year_col, year_col)
 
-  name_year_grouping <- list(name_col, year_col[1], year_col[2])
-  year_grouping <- list(year_col[1], year_col[2])
+  name_year_grouping <- c(list(name_col), as.list(year_col))
+  year_grouping <- as.list(year_col)
+
+  if (length(year_col) == 1) {
+    year_col <- c(year_col, year_col)
+  }
 
   data %>%
-    distinct_(.dots = name_year_grouping) %>%
-    group_by_(.dots = year_grouping) %>%
+    group_by(.dots = name_year_grouping) %>%
+    distinct(.keep_all = TRUE) %>%
+    group_by(.dots = year_grouping) %>%
     do(results = gender(.[[name_col]],
                         years = c(.[[year_col[1]]][1], .[[year_col[2]]][1]),
                         method = method)) %>%
