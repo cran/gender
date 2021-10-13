@@ -4,7 +4,7 @@
 #' devtools. If it is not up to date, reinstall it.
 #' @export
 check_genderdata_package <- function() {
-  genderdata_version <- "0.5.0"
+  genderdata_version <- "0.6.0"
   if (!requireNamespace("genderdata", quietly = TRUE)) {
     message("The genderdata package needs to be installed.")
     install_genderdata_package()
@@ -19,11 +19,11 @@ check_genderdata_package <- function() {
 install_genderdata_package <- function() {
   instructions <- paste(" Please try installing the package for yourself",
                         "using the following command: \n",
-  "    install.packages(\"genderdata\", repos = \"https://dev.ropensci.org\",",
-  "type = \"source\")")
+  "    remotes::install_github(\"lmullen/genderdata\")\n")
 
   error_func <- function(e) {
-    stop(paste("Failed to install the genderdata package.\n", instructions))
+    message(e)
+    cat(paste("\nFailed to install the genderdata package.\n", instructions))
   }
 
   if (interactive()) {
@@ -31,9 +31,7 @@ install_genderdata_package <- function() {
                          title = "Install the genderdata package?")
     if (input == 1) {
       message("Installing the genderdata package.")
-      tryCatch(utils::install.packages("genderdata",
-                                       repos = "https://dev.ropensci.org",
-                                       type = "source"),
+      tryCatch(remotes::install_github("lmullen/genderdata@v0.6.0"),
                error = error_func, warning = error_func)
     } else {
       stop(paste("The genderdata package is necessary for that method.\n",

@@ -3,14 +3,8 @@
 
 # gender
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/gender)](https://CRAN.R-project.org/package=gender)
-[![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/gender)](https://CRAN.R-project.org/package=gender)
-[![Build
-Status](https://travis-ci.org/ropensci/gender.svg?branch=master)](https://travis-ci.org/ropensci/gender)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/ropensci/gender?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/gender)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/ropensci/gender/master.svg)](https://codecov.io/github/ropensci/gender?branch=master)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/gender)](https://CRAN.R-project.org/package=gender)
+[![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gender)](https://CRAN.R-project.org/package=gender)
 
 ## Guidelines and warnings
 
@@ -20,7 +14,7 @@ that was gathered by the state. This method has many limitations, and
 before you use this package be sure to take into account the following
 guidelines.
 
-1)  Your analysis and the way you report it should take into account the
+1.  Your analysis and the way you report it should take into account the
     limitations of this method, which include its reliance of data
     created by the state and its inability to see beyond the
     state-imposed gender binary. At a minimum, be sure to read our
@@ -28,10 +22,10 @@ guidelines.
     review article that is critical of this sort of methodology, both
     cited below.
 
-2)  Do not use this package to study individuals: it is at most useful
+2.  Do not use this package to study individuals: it is at most useful
     for studying populations in the aggregate.
 
-3)  Resort to this method only when the alternative is not a more
+3.  Resort to this method only when the alternative is not a more
     nuanced and justifiable approach to studying gender, but where the
     alternative is not studying gender at all. For instance, for many
     historical sources this approach might be the only way to get a
@@ -74,22 +68,12 @@ install.packages("gender")
 
 The first time you use the package you will be prompted to install the
 accompanying [genderdata
-package](https://github.com/ropensci/genderdata). Alternatively, you can
-install this package for yourself from the [rOpenSci package
-repository](http://packages.ropensci.org/):
+package](https://github.com/lmullen/genderdata). Alternatively, you can
+install this package for yourself.
 
 ``` r
-install.packages("genderdata", type = "source",
-                 repos = "http://packages.ropensci.org")
-```
-
-If you prefer, you can install the development versions of both packages
-from the [rOpenSci package repository](http://packages.ropensci.org/):
-
-``` r
-install.packages(c("gender", "genderdata"),
-                 repos = "http://packages.ropensci.org",
-                 type = "source")
+# install.packages("remotes")
+remotes::install_github("lmullen/genderdata")
 ```
 
 ## Using the package
@@ -102,13 +86,13 @@ again in the 2000s using Social Security data.
 ``` r
 library(gender)
 gender(c("Madison", "Hillary"), years = 1930, method = "ssa")
-#> # A tibble: 2 x 6
+#> # A tibble: 2 × 6
 #>   name    proportion_male proportion_female gender year_min year_max
 #>   <chr>             <dbl>             <dbl> <chr>     <dbl>    <dbl>
 #> 1 Hillary               1                 0 male       1930     1930
 #> 2 Madison               1                 0 male       1930     1930
 gender(c("Madison", "Hillary"), years = c(2000, 2010), method = "ssa")
-#> # A tibble: 2 x 6
+#> # A tibble: 2 × 6
 #>   name    proportion_male proportion_female gender year_min year_max
 #>   <chr>             <dbl>             <dbl> <chr>     <dbl>    <dbl>
 #> 1 Hillary          0.0055             0.994 female     2000     2010
@@ -123,7 +107,7 @@ vignette(topic = "predicting-gender", package = "gender")
 ```
 
 To read the documentation for the datasets, install the [genderdata
-package](https://github.com/ropensci/genderdata) then examine the
+package](https://github.com/lmullen/genderdata) then examine the
 included datasets.
 
 ``` r
@@ -138,20 +122,20 @@ If you use this package, I would appreciate a citation.
 ``` r
 citation("gender")
 #> 
-#> To cite the 'gender' package, you may either cite the package
-#> directly or cite the journal article which explains its method:
+#> To cite the 'gender' package, you may either cite the package directly
+#> or cite the journal article which explains its method:
 #> 
-#>   Lincoln Mullen (2018). gender: Predict Gender from Names Using
-#>   Historical Data. R package version 0.5.2.
+#>   Lincoln Mullen (2021). gender: Predict Gender from Names Using
+#>   Historical Data. R package version 0.6.0.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {gender: Predict Gender from Names Using Historical Data},
 #>     author = {Lincoln Mullen},
-#>     year = {2018},
-#>     note = {R package version 0.5.2},
-#>     url = {https://github.com/ropensci/gender},
+#>     year = {2021},
+#>     note = {R package version 0.6.0},
+#>     url = {https://github.com/lmullen/gender},
 #>   }
 #> 
 #> For the journal article, please cite:
@@ -161,8 +145,3 @@ citation("gender")
 #> Humanities Quarterly_ 9, no. 3 (2015):
 #> <http://www.digitalhumanities.org/dhq/vol/9/3/000223/000223.html>.
 ```
-
------
-
-[![rOpenSci
-logo](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

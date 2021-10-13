@@ -31,7 +31,6 @@ gender(c("Madison", "Hillary"), years = 2000, method = "demo")
 
 ## -----------------------------------------------------------------------------
 library(dplyr)
-
 demo_names <- c("Susan", "Susan", "Madison", "Madison",
                 "Hillary", "Hillary", "Hillary")
 demo_years <- c(rep(c(1930, 2000), 3), 1930)
@@ -40,21 +39,7 @@ demo_df <- tibble(first_names = demo_names,
                       years = demo_years,
                       min_years = demo_years - 3,
                       max_years = demo_years + 3)
-
 demo_df
-
-## -----------------------------------------------------------------------------
-results <- gender_df(demo_df, name_col = "first_names", year_col = "years",
-                     method = "demo")
-results
-
-## -----------------------------------------------------------------------------
-demo_df %>% 
-  left_join(results, by = c("first_names" = "name", "years" = "year_min"))
-
-## -----------------------------------------------------------------------------
-gender_df(demo_df, name_col = "first_names",
-          year_col = c("min_years", "max_years"), method = "demo")
 
 ## -----------------------------------------------------------------------------
 demo_df %>% 
